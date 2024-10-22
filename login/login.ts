@@ -53,5 +53,3 @@ async function checkUserExist(): Promise<boolean> {
     console.log(`User data successfully updated in ${path}.`);
     return true;
 }
-
-checkUserExist()
