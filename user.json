@@ -1,0 +1,22 @@
+{
+    "user": [
+        {
+            "id": "test",
+            "server": [
+                {
+                    "serverId": "1",
+                    "nickname": "test1",
+                    "heroes": [
+                        "naruto",
+                        "sasuke"
+                    ]
+                },
+                {
+                    "serverId": "2",
+                    "nickname": "gaga",
+                    "heroes": []
+                }
+            ]
+        }
+    ]
+}
