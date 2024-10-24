@@ -1,4 +1,3 @@
-import { loadUser, loadServer } from "../utils";
 import path from "path"
 
 /*function for check server exist or not */
@@ -29,8 +28,7 @@ async function checkMaxPlayer(serverId: string): Promise<Boolean> {
     const selectedServer = await servers.servers.find((s: any) => s.serverId === serverId);
 
     //check player in server
-    if (selectedServer.playerCount >= selectedServer.maxPlayer) {
-        console.log(`server full`);
+    if (Number(selectedServer.playerCount) >= Number(selectedServer.maxPlayer)) {
         return false
     }
     return true
@@ -90,7 +88,6 @@ export async function checkUserExist() {
     while (!serverId || serverId.trim() === "" || !servers.includes(String(serverId))) {
         serverId = prompt("Please enter your valid server Id:");
 
-
     }
 
     //check max player
@@ -111,6 +108,7 @@ export async function checkUserExist() {
     }
     await addPlayerCountInServer(String(serverId));
     await addNicknameToUser(userExist, String(serverId));
+
 
     await Bun.write(jsonPath, JSON.stringify(userData, null, 2));
 
@@ -133,7 +131,13 @@ async function addNicknameToUser(user: any, serverId: String) {
         const newAccountInServer = {
             serverId: serverId,
             nickname: nickname,
-            heroes: []
+            ninjas: [{
+                "tag": "1",
+                "name": "naruto",
+                "jutsu": [
+                    "rasengan"
+                ]
+            }]
         }
         await user.server.push(newAccountInServer);
         console.log(`user dengan id ${user.id} mendaftar pada server ${serverId} dengan nickname : ${nickname}`);

@@ -1,22 +1,90 @@
 {
-    "user": [
+  "user": [
+    {
+      "id": "yogs",
+      "server": [
         {
-            "id": "test",
-            "server": [
-                {
-                    "serverId": "1",
-                    "nickname": "test1",
-                    "heroes": [
-                        "naruto",
-                        "sasuke"
-                    ]
-                },
-                {
-                    "serverId": "2",
-                    "nickname": "gaga",
-                    "heroes": []
-                }
-            ]
+          "serverId": "1",
+          "nickname": "yogaa1",
+          "ninjas": [
+            {
+              "tag": "1",
+              "name": "naruto",
+              "jutsu": [
+                "chidori",
+                "water-attack",
+                "raikiri",
+                "earth-attack",
+                "heal-leaf",
+                "light-attack",
+                "wind-attack",
+                "light-attack",
+                "rasengan",
+                "chidori"
+              ]
+            },
+            {
+              "tag": "1",
+              "name": "sakura",
+              "jutsu": [
+                "heal-leaf",
+                "punch-power",
+                "thunder-attack",
+                "earth-attack",
+                "heal-leaf"
+              ]
+            },
+            {
+              "tag": "2",
+              "name": "naruto",
+              "jutsu": [
+                "rasengan",
+                "thunder-attack",
+                "water-attack",
+                "wind-attack",
+                "water-attack"
+              ]
+            },
+            {
+              "tag": "3",
+              "name": "naruto",
+              "jutsu": [
+                "rasengan"
+              ]
+            },
+            {
+              "tag": "1",
+              "name": "sasuke",
+              "jutsu": [
+                "chidori"
+              ]
+            },
+            {
+              "tag": "1",
+              "name": "kakashi",
+              "jutsu": [
+                "raikiri"
+              ]
+            },
+            {
+              "tag": "2",
+              "name": "sasuke",
+              "jutsu": [
+                "chidori"
+              ]
+            },
+            {
+              "tag": "4",
+              "name": "naruto",
+              "jutsu": [
+                "rasengan"
+              ]
+            },
+            "water-attack",
+            "rasengan"
+          ]
         }
-    ]
+      ]
+    }
+  ]
 }
