@@ -1,0 +1,73 @@
+{
+    "chars": [
+        {
+            "id": "1",
+            "name": "naruto",
+            "class": "B",
+            "element": "wind",
+            "attribut": [
+                {
+                    "damage": "45",
+                    "defense": "28",
+                    "agility": "25",
+                    "health": "285"
+                }
+            ],
+            "jutsu": [
+                "rasengan"
+            ]
+        },
+        {
+            "id": "2",
+            "name": "sasuke",
+            "class": "B",
+            "element": "lightning",
+            "attribut": [
+                {
+                    "damage": "55",
+                    "defense": "20",
+                    "agility": "35",
+                    "health": "245"
+                }
+            ],
+            "jutsu": [
+                "chidori"
+            ]
+        },
+        {
+            "id": "3",
+            "name": "kakashi",
+            "class": "A",
+            "element": "lightning",
+            "attribut": [
+                {
+                    "damage": "65",
+                    "defense": "28",
+                    "agility": "38",
+                    "health": "270"
+                }
+            ],
+            "jutsu": [
+                "raikiri"
+            ]
+        },
+        {
+            "id": "4",
+            "name": "sakura",
+            "class": "B",
+            "element": "water",
+            "attribut": [
+                {
+                    "damage": "55",
+                    "defense": "40",
+                    "agility": "27",
+                    "health": "265"
+                }
+            ],
+            "jutsu": [
+                "heal-leaf",
+                "punch-power"
+            ]
+        }
+    ]
+}

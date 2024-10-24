@@ -1,19 +1,19 @@
 {
-    "servers": [
-        {
-            "serverId": "1",
-            "playerCount": "1",
-            "maxPlayer": "10"
-        },
-        {
-            "serverId": "2",
-            "playerCount": "0",
-            "maxPlayer": "10"
-        },
-        {
-            "serverId": "3",
-            "playerCount": "0",
-            "maxPlayer": "10"
-        }
-    ]
+  "servers": [
+    {
+      "serverId": "1",
+      "playerCount": "2",
+      "maxPlayer": "10"
+    },
+    {
+      "serverId": "2",
+      "playerCount": "0",
+      "maxPlayer": "10"
+    },
+    {
+      "serverId": "3",
+      "playerCount": "0",
+      "maxPlayer": "10"
+    }
+  ]
 }

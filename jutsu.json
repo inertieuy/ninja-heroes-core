@@ -1,0 +1,116 @@
+{
+    "jutsu": [
+        {
+            "id": "1",
+            "name": "rasengan",
+            "type": "damage",
+            "element": "wind",
+            "value": "35",
+            "class": "A"
+        },
+        {
+            "id": "2",
+            "name": "knife-attack",
+            "type": "damage",
+            "element": null,
+            "value": "10",
+            "class": "C"
+        },
+        {
+            "id": "3",
+            "name": "fire-attack",
+            "type": "damage",
+            "element": "fire",
+            "value": "15",
+            "class": "B"
+        },
+        {
+            "id": "4",
+            "name": "ice-attack",
+            "type": "damage",
+            "element": "water",
+            "value": "15",
+            "class": "B"
+        },
+        {
+            "id": "5",
+            "name": "thunder-attack",
+            "type": "damage",
+            "element": "lightning",
+            "value": "15",
+            "class": "B"
+        },
+        {
+            "id": "6",
+            "name": "earth-attack",
+            "type": "damage",
+            "element": "earth",
+            "value": "15",
+            "class": "B"
+        },
+        {
+            "id": "7",
+            "name": "wind-attack",
+            "type": "damage",
+            "element": "wind",
+            "value": "15",
+            "class": "B"
+        },
+        {
+            "id": "8",
+            "name": "lightning-attack",
+            "type": "damage",
+            "element": "lightning",
+            "value": "15",
+            "class": "B"
+        },
+        {
+            "id": "9",
+            "name": "water-attack",
+            "type": "damage",
+            "element": "water",
+            "value": "15",
+            "class": "B"
+        },
+        {
+            "id": "10",
+            "name": "light-attack",
+            "type": "damage",
+            "element": "lightning",
+            "value": "15",
+            "class": "B"
+        },
+        {
+            "id": "11",
+            "name": "chidori",
+            "type": "damage",
+            "element": "lightning",
+            "value": "35",
+            "class": "A"
+        },
+        {
+            "id": "12",
+            "name": "heal-leaf",
+            "type": "heal",
+            "element": "water",
+            "value": "19",
+            "class": "B"
+        },
+        {
+            "id": "13",
+            "name": "raikiri",
+            "type": "damage",
+            "element": "lightning",
+            "value": "40",
+            "class": "S"
+        },
+        {
+            "id": "14",
+            "name": "punch-power",
+            "type": "damage",
+            "element": null,
+            "value": "25",
+            "class": "B"
+        }
+    ]
+}
