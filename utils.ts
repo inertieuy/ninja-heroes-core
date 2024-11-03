@@ -1,18 +1,37 @@
-import path from "path";
+import path from 'path';
 
-export async function loadServer(): Promise<any> {
+class Utils {
+  async loadServer(): Promise<any> {
     const jsonPath = path.resolve(__dirname, './server.json');
     const file = Bun.file(jsonPath);
 
     // Muat file JSON
-    const servers = await file.json();
-    return servers;
-}
-export async function loadUser(): Promise<any> {
+    return await file.json();
+  }
+
+  async loadUser(): Promise<any> {
     const jsonPath = path.resolve(__dirname, './user.json');
     const file = Bun.file(jsonPath);
 
     // Muat file JSON
-    const servers = await file.json();
-    return servers;
+    return await file.json();
+  }
+
+  async syncServer(): Promise<any> {
+    const serverData = await this.loadServer();
+    const userData = await this.loadUser();
+    console.log(userData);
+
+    userData.user.forEach((user: any) => {
+      const hashServer = user.server.find(
+        (server: any) => server.serverId === 1,
+      );
+      if (hashServer) {
+        console.log('Detail server dengan serverId 1:', hashServer);
+      }
+    });
+    console.log(JSON.stringify(userData, null, 2));
+  }
 }
+const util = new Utils();
+util.syncServer();
