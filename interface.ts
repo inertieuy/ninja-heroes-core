@@ -20,12 +20,3 @@ export interface Jutsu {
     value: number;
     class: 'S' | 'A' | 'B' | 'C' | 'D';
 }
-
-export interface WriteNinja {
-    tag: string
-    name: string
-    jutsu: string[]
-}
-export interface WriteJutsuToNinja {
-    jutsu: string
-}
