@@ -63,7 +63,11 @@
               "tag": "1",
               "name": "kakashi",
               "jutsu": [
-                "raikiri"
+                "raikiri",
+                "knife-attack",
+                "rasengan",
+                "ice-attack",
+                "knife-attack"
               ]
             },
             {
@@ -81,7 +85,81 @@
               ]
             },
             "water-attack",
-            "rasengan"
+            "rasengan",
+            {
+              "tag": "2",
+              "name": "sakura",
+              "jutsu": [
+                "heal-leaf",
+                "punch-power"
+              ]
+            },
+            {
+              "tag": "2",
+              "name": "kakashi",
+              "jutsu": [
+                "raikiri",
+                "ice-attack"
+              ]
+            },
+            {
+              "tag": "3",
+              "name": "sakura",
+              "jutsu": [
+                "heal-leaf",
+                "punch-power"
+              ]
+            },
+            {
+              "tag": "3",
+              "name": "kakashi",
+              "jutsu": [
+                "raikiri"
+              ]
+            },
+            {
+              "tag": "4",
+              "name": "kakashi",
+              "jutsu": [
+                "raikiri"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q",
+      "server": [
+        {
+          "serverId": "2",
+          "nickname": "11",
+          "ninjas": [
+            {
+              "tag": "1",
+              "name": "naruto",
+              "jutsu": [
+                "rasengan"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dss",
+      "server": [
+        {
+          "serverId": "1",
+          "nickname": "121",
+          "ninjas": [
+            {
+              "tag": "1",
+              "name": "naruto",
+              "jutsu": [
+                "rasengan"
+              ]
+            }
           ]
         }
       ]

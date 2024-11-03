@@ -1,146 +1,154 @@
 import path from "path"
 
-/*function for check server exist or not */
-async function checkServerExist(): Promise<string[]> {
-    const jsonPath = path.resolve(__dirname, '../server.json');
-    const file = Bun.file(jsonPath);
-
-    // Muat file JSON
-    const servers = await file.json();
-
-    //maping file server
-    const serverIds = await servers.servers.map((s: any) => s.serverId);
-    console.log("Server Avaible:", serverIds.join(", "));
-
-    return serverIds;
+interface ILogin {
+    checkUserExist(): Promise<void>
 }
+class Login implements ILogin {
+    /*function for check server exist or not */
+    private async checkServerExist(): Promise<string[]> {
+        const jsonPath = path.resolve(__dirname, '../server.json');
+        const file = Bun.file(jsonPath);
 
-/*function for check max player */
-async function checkMaxPlayer(serverId: string): Promise<Boolean> {
+        // Muat file JSON
+        const servers = await file.json();
 
-    const jsonPath = path.resolve(__dirname, '../server.json');
-    const file = Bun.file(jsonPath);
+        //maping file server
+        const serverIds = await servers.servers.map((s: any) => s.serverId);
+        console.log("Server Avaible:", serverIds.join(", "));
 
-    // Muat file JSON
-    const servers = await file.json();
-
-    //maping file server
-    const selectedServer = await servers.servers.find((s: any) => s.serverId === serverId);
-
-    //check player in server
-    if (Number(selectedServer.playerCount) >= Number(selectedServer.maxPlayer)) {
-        return false
-    }
-    return true
-}
-
-/*function for add player in server */
-async function addPlayerCountInServer(serverId: string) {
-    const jsonPath = path.resolve(__dirname, '../server.json');
-    const file = Bun.file(jsonPath);
-
-    // Muat file JSON
-    const servers = await file.json();
-    // load file JSON
-
-    //find serverId
-    const selectedServer = await servers.servers.find((s: any) => s.serverId === serverId);
-
-    //add player in server
-    let countPlayer = Number(selectedServer.playerCount) + 1
-    selectedServer.playerCount = countPlayer.toString()
-
-    //writting to json file
-    await Bun.write(jsonPath, JSON.stringify(servers, null, 2));
-}
-
-/*function for check user exist or not */
-export async function checkUserExist() {
-    //load file json
-    const jsonPath = path.resolve(__dirname, '../user.json');
-    const file = Bun.file(jsonPath);
-
-    // Muat file JSON
-    const userData = await file.json();
-
-    //input id
-    let userId = prompt("Please enter your id:");
-    while (!userId || userId.trim() === "") {
-        userId = prompt("Please enter your id:");
+        return serverIds;
     }
 
-    //find id
-    let userExist = await userData.user.find((u: any) => u.id === userId);
+    /*function for check max player */
+    private async checkMaxPlayer(serverId: string): Promise<Boolean> {
 
-    /*creat new user if not exist */
-    if (!userExist) {
+        const jsonPath = path.resolve(__dirname, '../server.json');
+        const file = Bun.file(jsonPath);
 
-        userExist = { id: userId, server: [] }
-        await userData.user.push(userExist);
+        // Muat file JSON
+        const servers = await file.json();
 
+        //maping file server
+        const selectedServer = await servers.servers.find((s: any) => s.serverId === serverId);
+
+        //check player in server
+        if (Number(selectedServer.playerCount) >= Number(selectedServer.maxPlayer)) {
+            return false
+        }
+        return true
     }
 
-    //check server
-    const servers = await checkServerExist();
+    /*function for add player in server */
+    private async addPlayerCountInServer(serverId: string) {
+        const jsonPath = path.resolve(__dirname, '../server.json');
+        const file = Bun.file(jsonPath);
 
-    let serverId = prompt("Please enter the server id:");
+        // Muat file JSON
+        const servers = await file.json();
+        // load file JSON
 
-    while (!serverId || serverId.trim() === "" || !servers.includes(String(serverId))) {
-        serverId = prompt("Please enter your valid server Id:");
+        //find serverId
+        const selectedServer = await servers.servers.find((s: any) => s.serverId === serverId);
 
+        //add player in server
+        let countPlayer = Number(selectedServer.playerCount) + 1
+        selectedServer.playerCount = countPlayer.toString()
+
+        //writting to json file
+        await Bun.write(jsonPath, JSON.stringify(servers, null, 2));
     }
 
-    //check max player
-    let canAddPlayer = false;
+    /*function for check user exist or not */
+    async checkUserExist() {
+        //load file json
+        const jsonPath = path.resolve(__dirname, '../user.json');
+        const file = Bun.file(jsonPath);
 
-    while (!canAddPlayer) {
-        // Periksa apakah server penuh
-        canAddPlayer = await checkMaxPlayer(String(serverId));
+        // Muat file JSON
+        const userData = await file.json();
 
-        if (!canAddPlayer) {
-            // Jika server penuh, minta pengguna untuk memilih server lain
-            console.log(`Server ${serverId} is full. Please choose another server.`);
-            serverId = prompt("Please enter another server id:");
-            while (!serverId || serverId.trim() === "" || !servers.includes(String(serverId))) {
-                serverId = prompt("Please enter your valid server Id:");
+        //input id
+        let userId = prompt("Please enter your id:");
+        while (!userId || userId.trim() === "") {
+            userId = prompt("Please enter your id:");
+        }
+
+        //find id
+        let userExist = await userData.user.find((u: any) => u.id === userId);
+
+        /*creat new user if not exist */
+        if (!userExist) {
+
+            userExist = { id: userId, server: [] }
+            await userData.user.push(userExist);
+
+        }
+
+        //check server
+        const servers = await this.checkServerExist();
+
+        let serverId = prompt("Please enter the server id:");
+
+        while (!serverId || serverId.trim() === "" || !servers.includes(String(serverId))) {
+            serverId = prompt("Please enter your valid server Id:");
+
+        }
+
+        //check max player
+        let canAddPlayer = false;
+
+        while (!canAddPlayer) {
+            // Periksa apakah server penuh
+            canAddPlayer = await this.checkMaxPlayer(String(serverId));
+
+            if (!canAddPlayer) {
+                // Jika server penuh, minta pengguna untuk memilih server lain
+                console.log(`Server ${serverId} is full. Please choose another server.`);
+                serverId = prompt("Please enter another server id:");
+                while (!serverId || serverId.trim() === "" || !servers.includes(String(serverId))) {
+                    serverId = prompt("Please enter your valid server Id:");
+                }
             }
         }
-    }
-    await addPlayerCountInServer(String(serverId));
-    await addNicknameToUser(userExist, String(serverId));
+        await this.addPlayerCountInServer(String(serverId));
+        await this.addNicknameToUser(userExist, String(serverId));
 
 
-    await Bun.write(jsonPath, JSON.stringify(userData, null, 2));
+        await Bun.write(jsonPath, JSON.stringify(userData, null, 2));
 
-}
-
-/*function for add nickname to user */
-async function addNicknameToUser(user: any, serverId: String) {
-
-    const isUserExistInServer = await user.server.find((s: any) => s.serverId === serverId);
-
-    if (!isUserExistInServer) {
-
-        let nickname = prompt("Please enter your nickname:");
-
-        while (!nickname || nickname.trim() === "") {
-            nickname = prompt("Please enter your nickname:");
-
-        }
-
-        const newAccountInServer = {
-            serverId: serverId,
-            nickname: nickname,
-            ninjas: [{
-                "tag": "1",
-                "name": "naruto",
-                "jutsu": [
-                    "rasengan"
-                ]
-            }]
-        }
-        await user.server.push(newAccountInServer);
-        console.log(`user dengan id ${user.id} mendaftar pada server ${serverId} dengan nickname : ${nickname}`);
     }
 
+    /*function for add nickname to user */
+    private async addNicknameToUser(user: any, serverId: String) {
+
+        const isUserExistInServer = await user.server.find((s: any) => s.serverId === serverId);
+
+        if (!isUserExistInServer) {
+
+            let nickname = prompt("Please enter your nickname:");
+
+            while (!nickname || nickname.trim() === "") {
+                nickname = prompt("Please enter your nickname:");
+
+            }
+
+            const newAccountInServer = {
+                serverId: serverId,
+                nickname: nickname,
+                ninjas: [{
+                    "tag": "1",
+                    "name": "naruto",
+                    "jutsu": [
+                        "rasengan"
+                    ]
+                }]
+            }
+            await user.server.push(newAccountInServer);
+            console.log(`user dengan id ${user.id} mendaftar pada server ${serverId} dengan nickname : ${nickname}`);
+        }
+
+    }
 }
+
+const login = new Login();
+login.checkUserExist();
