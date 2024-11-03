@@ -5,162 +5,30 @@
       "server": [
         {
           "serverId": "1",
-          "nickname": "yogaa1",
+          "nickname": "yogs1",
           "ninjas": [
             {
               "tag": "1",
               "name": "naruto",
               "jutsu": [
-                "chidori",
-                "water-attack",
-                "raikiri",
-                "earth-attack",
-                "heal-leaf",
-                "light-attack",
-                "wind-attack",
-                "light-attack",
-                "rasengan",
-                "chidori"
-              ]
-            },
-            {
-              "tag": "1",
-              "name": "sakura",
-              "jutsu": [
-                "heal-leaf",
-                "punch-power",
-                "thunder-attack",
-                "earth-attack",
-                "heal-leaf"
-              ]
-            },
-            {
-              "tag": "2",
-              "name": "naruto",
-              "jutsu": [
-                "rasengan",
-                "thunder-attack",
-                "water-attack",
-                "wind-attack",
-                "water-attack"
-              ]
-            },
-            {
-              "tag": "3",
-              "name": "naruto",
-              "jutsu": [
-                "rasengan"
+                {
+                  "name": "rasengan",
+                  "level": "1"
+                }
               ]
             },
             {
               "tag": "1",
               "name": "sasuke",
               "jutsu": [
-                "chidori"
-              ]
-            },
-            {
-              "tag": "1",
-              "name": "kakashi",
-              "jutsu": [
-                "raikiri",
-                "knife-attack",
-                "rasengan",
-                "ice-attack",
-                "knife-attack"
-              ]
-            },
-            {
-              "tag": "2",
-              "name": "sasuke",
-              "jutsu": [
-                "chidori"
-              ]
-            },
-            {
-              "tag": "4",
-              "name": "naruto",
-              "jutsu": [
-                "rasengan"
-              ]
-            },
-            "water-attack",
-            "rasengan",
-            {
-              "tag": "2",
-              "name": "sakura",
-              "jutsu": [
-                "heal-leaf",
-                "punch-power"
-              ]
-            },
-            {
-              "tag": "2",
-              "name": "kakashi",
-              "jutsu": [
-                "raikiri",
-                "ice-attack"
-              ]
-            },
-            {
-              "tag": "3",
-              "name": "sakura",
-              "jutsu": [
-                "heal-leaf",
-                "punch-power"
-              ]
-            },
-            {
-              "tag": "3",
-              "name": "kakashi",
-              "jutsu": [
-                "raikiri"
-              ]
-            },
-            {
-              "tag": "4",
-              "name": "kakashi",
-              "jutsu": [
-                "raikiri"
+                {
+                  "name": "chidori",
+                  "level": "1"
+                }
               ]
             }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "q",
-      "server": [
-        {
-          "serverId": "2",
-          "nickname": "11",
-          "ninjas": [
-            {
-              "tag": "1",
-              "name": "naruto",
-              "jutsu": [
-                "rasengan"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "dss",
-      "server": [
-        {
-          "serverId": "1",
-          "nickname": "121",
-          "ninjas": [
-            {
-              "tag": "1",
-              "name": "naruto",
-              "jutsu": [
-                "rasengan"
-              ]
-            }
-          ]
+          ],
+          "star": "0"
         }
       ]
     }

@@ -3,8 +3,7 @@ interface IStats {
 }
 class Stats {
     private async checkServer(data: any, serverId: string | null) {
-        const selectedServer = data.servers.find((s: any) => s.serverId === serverId)
-        return selectedServer
+        return data.servers.find((s: any) => s.serverId === serverId)
     }
     async checkStatsServer(): Promise<Boolean> {
         const path = "./server.json";
@@ -19,15 +18,15 @@ class Stats {
 
         const inputServer = prompt(`Please choose a server:`)
 
-        const selectedServer = await this.checkServer(servers, inputServer)
+        const selectServer = await this.checkServer(servers, inputServer)
 
 
-        if (!selectedServer) {
+        if (!selectServer) {
             console.log(`Server ${inputServer} not found.`);
             return false;
 
         }
-        console.log(`Server ${inputServer} found:`, selectedServer);
+        console.log(`Server ${inputServer} found:`, selectServer);
         return true;
 
     }
