@@ -1,7 +1,7 @@
 import path from 'path';
 
 class Utils {
-  async loadServer(): Promise<any> {
+  private async loadServer(): Promise<any> {
     const jsonPath = path.resolve(__dirname, './server.json');
     const file = Bun.file(jsonPath);
 
@@ -9,7 +9,7 @@ class Utils {
     return await file.json();
   }
 
-  async loadUser(): Promise<any> {
+  private async loadUser(): Promise<any> {
     const jsonPath = path.resolve(__dirname, './user.json');
     const file = Bun.file(jsonPath);
 
@@ -17,21 +17,45 @@ class Utils {
     return await file.json();
   }
 
-  async syncServer(): Promise<any> {
-    const serverData = await this.loadServer();
-    const userData = await this.loadUser();
-    console.log(userData);
-
+  async syncServer(
+    serverId: string,
+    serverData: any,
+    userData: any,
+  ): Promise<any> {
+    let count = 0;
     userData.user.forEach((user: any) => {
       const hashServer = user.server.find(
-        (server: any) => server.serverId === 1,
+        (server: any) => server.serverId === serverId,
       );
       if (hashServer) {
-        console.log('Detail server dengan serverId 1:', hashServer);
+        count += 1;
       }
     });
-    console.log(JSON.stringify(userData, null, 2));
+    console.log(count);
+
+    const syncUser = serverData.servers.find(
+      (server: any) => server.serverId === serverId,
+    );
+    if (syncUser) {
+      syncUser.playerCount = count.toString();
+    }
+  }
+
+  async syncAllServers(): Promise<void> {
+    const serverData = await this.loadServer();
+    const userData = await this.loadUser();
+    const serverIds = serverData.servers.map((server: any) => server.serverId);
+
+    await Promise.all(
+      serverIds.map((serverId: string) => {
+        this.syncServer(serverId, serverData, userData);
+      }),
+    );
+    const patha = path.resolve(__dirname, './server.json');
+    await Bun.write(patha, JSON.stringify(serverData, null, 2));
   }
 }
 const util = new Utils();
-util.syncServer();
+util.syncAllServers().finally(() => {
+  console.log('success sync server');
+});
