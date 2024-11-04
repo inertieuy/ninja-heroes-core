@@ -98,25 +98,24 @@ class Login implements ILogin {
     //check max player
     let canAddPlayer = false;
 
-    while (!canAddPlayer) {
-      // Periksa apakah server penuh
+    do {
       canAddPlayer = await this.checkMaxPlayer(String(serverId));
 
       if (!canAddPlayer) {
-        // Jika server penuh, minta pengguna untuk memilih server lain
         console.log(
           `Server ${serverId} is full. Please choose another server.`,
         );
-        serverId = prompt('Please enter another server id:');
-        while (
+
+        do {
+          serverId = prompt('Please enter a valid server ID:');
+        } while (
           !serverId ||
-          serverId.trim() === '' ||
+          !serverId.trim() ||
           !servers.includes(String(serverId))
-        ) {
-          serverId = prompt('Please enter your valid server Id:');
-        }
+        );
       }
-    }
+    } while (!canAddPlayer);
+
     await this.addPlayerCountInServer(String(serverId));
     await this.addNicknameToUser(userExist, String(serverId));
 
