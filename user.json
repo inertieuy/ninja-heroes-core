@@ -1,7 +1,7 @@
 {
   "user": [
     {
-      "id": "yogs",
+      "id": "yogs1",
       "server": [
         {
           "serverId": "1",
@@ -12,23 +12,34 @@
               "name": "naruto",
               "jutsu": [
                 {
+                  "tag": "1",
                   "name": "rasengan",
                   "level": "1"
-                }
-              ]
-            },
-            {
-              "tag": "1",
-              "name": "sasuke",
-              "jutsu": [
+                },
                 {
-                  "name": "chidori",
+                  "tag": "1",
+                  "name": "fire-attack",
+                  "level": "1"
+                },
+                {
+                  "tag": "1",
+                  "name": "wind-attack",
+                  "level": "1"
+                },
+                {
+                  "tag": "1",
+                  "name": "thunder-attack",
+                  "level": "1"
+                },
+                {
+                  "tag": "1",
+                  "name": "knife-attack",
                   "level": "1"
                 }
               ]
             }
           ],
-          "star": "0"
+          "star": "470"
         }
       ]
     }
