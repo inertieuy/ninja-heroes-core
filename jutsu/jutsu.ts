@@ -14,7 +14,7 @@ class RollJutsu implements IRollJutsu {
     this._ninja = ninja;
     this._tag = tag;
   }
-  private async rollJutsu(): Promise<any> {
+  private async rollJutsu(existingJutsu: string[]): Promise<any> {
     const jsonPath = path.resolve(__dirname, '../jutsu.json');
     const file = Bun.file(jsonPath);
 
@@ -27,9 +27,16 @@ class RollJutsu implements IRollJutsu {
       }
 
       const jutsuList: IJutsu[] = allJutsu.jutsu;
-      const rndJutsu = jutsuList[Math.floor(Math.random() * jutsuList.length)];
 
-      return rndJutsu;
+      const availableJutsu = jutsuList.filter(
+        (jutsu) => !existingJutsu.includes(jutsu.name),
+      );
+
+      if (availableJutsu.length === 0) {
+        throw new Error('No new jutsu available to roll.');
+      }
+
+      return availableJutsu[Math.floor(Math.random() * availableJutsu.length)];
     } catch (error) {
       console.log(error);
     }
@@ -42,9 +49,7 @@ class RollJutsu implements IRollJutsu {
     try {
       // Muat file JSON
       const userData = await file.json();
-
       const userFind = userData.user.find((u: any) => u.id === this._userId);
-
       if (!userFind) {
         throw new Error('User not found');
       }
@@ -52,7 +57,7 @@ class RollJutsu implements IRollJutsu {
       const serverFind = userFind.server.find(
         (s: any) => s.serverId === this._serverId,
       );
-      if (!userFind) {
+      if (!serverFind) {
         throw new Error('Server not found');
       }
 
@@ -63,20 +68,83 @@ class RollJutsu implements IRollJutsu {
         throw new Error('Ninja not found');
       }
 
-      const maxJutsu = 5;
-      if (ninjaFind.jutsu.length >= maxJutsu) {
-        throw new Error('Ninja already have max jutsu');
-      }
-
-      const jutsu = await this.rollJutsu();
-
-      const resultJutsu: IWriteJutsuToNinja = {
-        jutsu: jutsu.name,
+      const starValues = {
+        S: 50,
+        A: 40,
+        B: 30,
+        C: 20,
+        D: 10,
       };
-      console.log(`anda mendapatkan ${resultJutsu.jutsu}`);
 
-      ninjaFind.jutsu.push(resultJutsu.jutsu);
+      const existingJutsu = ninjaFind.jutsu.map((j: any) => j.name);
+      console.log(existingJutsu);
+      const jutsuName = await this.rollJutsu(existingJutsu);
 
+      const jutsuFind = ninjaFind.jutsu.filter(
+        (n: any) => n.name === jutsuName.name,
+      );
+
+      const maxJutsu = 5;
+
+      if (ninjaFind.jutsu.length >= maxJutsu) {
+        const userChoice = prompt(
+          `Jutsu maksimum (${maxJutsu}) tercapai. Pilih \n 1. 'burn' untuk menambah star \n 2. 'replace' untuk mengganti jutsu lama \n user : `,
+        );
+
+        if (userChoice === '1') {
+          const burnJutsu = starValues[jutsuName.class] ?? 0;
+
+          serverFind.star = (parseInt(serverFind.star) + burnJutsu).toString();
+        } else if (userChoice === '2') {
+          const jsonPath = path.resolve(__dirname, '../jutsu.json');
+          const file = Bun.file(jsonPath);
+          const jutsuData = await file.json();
+
+          const jutsuIdx = ninjaFind.jutsu.map((j: any) => j.name);
+          console.log('Jutsu Available:');
+          jutsuIdx.forEach((jutsu, index) => {
+            console.log(`${index + 1}. ${jutsu}`);
+          });
+
+          const user = prompt('Enter the number of the jutsu to replace:');
+
+          if (!isNaN(user) && user >= 1 && user <= jutsuIdx.length) {
+            const indexToReplace = user - 1;
+
+            const selectedJutsu = jutsuIdx[indexToReplace];
+
+            const classFind = jutsuData.jutsu.find(
+              (j: any) => j.name === selectedJutsu,
+            );
+            const replacedJutsu = ninjaFind.jutsu[indexToReplace];
+            const burnJutsu = starValues[classFind.class] ?? 0;
+
+            serverFind.star = (
+              parseInt(serverFind.star) + burnJutsu
+            ).toString();
+
+            // Ganti jutsu pada indeks yang dipilih
+            ninjaFind.jutsu[indexToReplace] = {
+              tag: (jutsuFind.length + 1).toString(),
+              name: jutsuName.name,
+              level: '1',
+            };
+          }
+        } else {
+          console.log('Invalid choice. No jutsu replaced.');
+        }
+      } else {
+        const resultJutsu: IWriteJutsuToNinja = {
+          jutsu: {
+            tag: (jutsuFind.length + 1).toString(),
+            name: jutsuName.name,
+            level: '1',
+          },
+        };
+        console.log(`anda mendapatkan ${jutsuName.name}`);
+
+        ninjaFind.jutsu.push(resultJutsu.jutsu);
+      }
       await Bun.write(jsonPath, JSON.stringify(userData, null, 2));
     } catch (error) {
       console.log(error);
@@ -84,7 +152,8 @@ class RollJutsu implements IRollJutsu {
   }
 }
 
-const jutsu = new RollJutsu('yogs', '1', 'kakashi', '2');
+const jutsu = new RollJutsu('yogs1', '1', 'naruto', '1');
+
 jutsu.writeSkillToNinjaUser().finally(async () => {
   console.log('done');
 });

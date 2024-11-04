@@ -58,14 +58,13 @@ class Ninja implements INinja {
       if (!ninjaFind) {
         throw new Error('Ninja not found');
       }
-      const sumNinja = ninjaFind.length + 1;
 
       const jutsuList = Array.isArray(ninja?.jutsu)
         ? ninja.jutsu
         : [ninja?.jutsu];
 
       const resultNinja: IWriteNinja = {
-        tag: sumNinja.toString(),
+        tag: (ninjaFind.length + 1).toString(),
         name: ninja?.name,
         jutsu: jutsuList.map((jutsu: any) => ({
           tag: '1',

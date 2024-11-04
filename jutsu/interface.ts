@@ -1,6 +1,10 @@
+import { ILvlJutsu } from '../interface';
+
 export interface IWriteJutsuToNinja {
-  jutsu: string;
+  tag: string;
+  jutsu: ILvlJutsu[];
 }
+
 export interface IRollJutsu {
   writeSkillToNinjaUser(): Promise<void>;
 }
