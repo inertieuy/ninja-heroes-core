@@ -47,7 +47,6 @@ class RollJutsu implements IRollJutsu {
     const file = Bun.file(jsonPath);
 
     try {
-      // Muat file JSON
       const userData = await file.json();
       const userFind = userData.user.find((u: any) => u.id === this._userId);
       if (!userFind) {
@@ -77,7 +76,6 @@ class RollJutsu implements IRollJutsu {
       };
 
       const existingJutsu = ninjaFind.jutsu.map((j: any) => j.name);
-      console.log(existingJutsu);
       const jutsuName = await this.rollJutsu(existingJutsu);
 
       const jutsuFind = ninjaFind.jutsu.filter(
@@ -93,11 +91,11 @@ class RollJutsu implements IRollJutsu {
 
         if (userChoice === '1') {
           const burnJutsu = starValues[jutsuName.class] ?? 0;
-
           serverFind.star = (parseInt(serverFind.star) + burnJutsu).toString();
         } else if (userChoice === '2') {
           const jsonPath = path.resolve(__dirname, '../jutsu.json');
           const file = Bun.file(jsonPath);
+
           const jutsuData = await file.json();
 
           const jutsuIdx = ninjaFind.jutsu.map((j: any) => j.name);
@@ -116,14 +114,13 @@ class RollJutsu implements IRollJutsu {
             const classFind = jutsuData.jutsu.find(
               (j: any) => j.name === selectedJutsu,
             );
-            const replacedJutsu = ninjaFind.jutsu[indexToReplace];
+
             const burnJutsu = starValues[classFind.class] ?? 0;
 
             serverFind.star = (
               parseInt(serverFind.star) + burnJutsu
             ).toString();
 
-            // Ganti jutsu pada indeks yang dipilih
             ninjaFind.jutsu[indexToReplace] = {
               tag: (jutsuFind.length + 1).toString(),
               name: jutsuName.name,
