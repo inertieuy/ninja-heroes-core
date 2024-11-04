@@ -11,7 +11,7 @@ class Ninja implements INinja {
     this._serverId = serverId;
   }
 
-  private async rollNinja(): Promise<IChar | undefined> {
+  private async rollNinja(): Promise<any> {
     const jsonPath = path.resolve(__dirname, '../char.json');
     const file = Bun.file(jsonPath);
 
@@ -50,7 +50,7 @@ class Ninja implements INinja {
       }
 
       const ninja = await this.rollNinja();
-      console.log(ninja);
+
       const ninjaFind = serverFind.ninjas.filter(
         (n: any) => n.name === ninja?.name,
       );
@@ -67,7 +67,8 @@ class Ninja implements INinja {
       const resultNinja: IWriteNinja = {
         tag: sumNinja.toString(),
         name: ninja?.name,
-        jutsu: jutsuList.map((jutsu) => ({
+        jutsu: jutsuList.map((jutsu: any) => ({
+          tag: '1',
           name: jutsu ?? '',
           level: '1',
         })),
@@ -82,7 +83,7 @@ class Ninja implements INinja {
     }
   }
 }
-const user = new Ninja('yogs', '1');
+const user = new Ninja('yogs1', '1');
 user.writeNinjaToUser().finally(async () => {
   console.log('done');
 });

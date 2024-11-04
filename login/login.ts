@@ -144,6 +144,7 @@ class Login implements ILogin {
             name: 'naruto',
             jutsu: [
               {
+                tag: '1',
                 name: 'rasengan',
                 level: '1',
               },

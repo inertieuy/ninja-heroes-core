@@ -4,9 +4,9 @@ export interface IChar {
   class: 'S' | 'A' | 'B' | 'C' | 'D';
   element: 'water' | 'lightning' | 'fire' | 'earth' | 'wind';
   attribut: IAttribut[];
-  jutsu: ILvl[];
+  jutsu: ILvlJutsu[];
 }
-export interface ILvl {
+export interface ILvlJutsu {
   name: string;
   level: string;
 }
