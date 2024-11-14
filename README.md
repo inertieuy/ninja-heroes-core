@@ -1,1 +1,1 @@
-ninja-heroes-core
+ninja-heroes-core (terbengkalai)
